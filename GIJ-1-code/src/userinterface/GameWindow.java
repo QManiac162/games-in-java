@@ -18,9 +18,10 @@ public class GameWindow extends JFrame{
 		new GameWindow().setVisible(true);
 	}
 	public void paint(Graphics g) {
-		// to add background: 
+		// command to add background: 
 		super.paint(g);
-		// to draw lines in GameWindow: g.drawLine(10, 10, 100, 100);
+		// to draw lines in GameWindow: 
+		g.drawLine(10, 10, 100, 100);
 		
 		BufferedImage image = null;
 		
