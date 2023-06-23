@@ -9,7 +9,7 @@ public class GameScreen extends JPanel implements Runnable{
 	private Thread thread;
 	
 	public GameScreen() {
-		// to color the game screen: setBackground(Color.RED);
+		// command to color the game screen: setBackground(Color.RED);
 		thread = new Thread(this);
 	}
 	public void startGame() {
