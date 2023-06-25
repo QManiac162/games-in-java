@@ -1,7 +1,11 @@
 package objectgame;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +24,9 @@ public class CactusEnemyManager {
 	private MainCharacter mainCharacter;
 	private GameScreen gameScreen;
 	
+	@SuppressWarnings("removal")
+	private AudioClip deadSound;
+	
 	public CactusEnemyManager(MainCharacter mainCharacter, GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		this.mainCharacter = mainCharacter;
@@ -28,6 +35,12 @@ public class CactusEnemyManager {
 		imageCactus2 = Resource.getResourceImage("data/cactus2.png");
 		random = new Random();
 		enemy.add(getRandomCactus());
+		try {
+			deadSound = Applet.newAudioClip(new URL("file","","data/dead.wav"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void update() {
 		for(CactusEnemy e: enemy) {
@@ -37,6 +50,7 @@ public class CactusEnemyManager {
 				e.setScoreGot(true);
 			}
 			if(e.getBound().intersects(mainCharacter.getBound())) {
+				deadSound.play();
 				mainCharacter.setAlive(false);
 			}
 		}
@@ -50,10 +64,11 @@ public class CactusEnemyManager {
 	public void draw(Graphics g) {
 		for(CactusEnemy e: enemy) {
 			e.draw(g);
-			if(e.getBound().intersects(mainCharacter.getBound())) {
-				
-			}
 		}
+	}
+	public void reset() {
+		enemy.clear();
+		enemy.add(getRandomCactus());
 	}
 	private Cactus getRandomCactus() {
 		Cactus cactus = new Cactus(mainCharacter);

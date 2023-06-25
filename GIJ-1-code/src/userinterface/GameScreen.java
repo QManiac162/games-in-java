@@ -1,5 +1,7 @@
 package userinterface;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,6 +10,9 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import objectgame.CactusEnemyManager;
 import objectgame.Cloud;
@@ -33,16 +38,25 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 	private int gameState = GAME_FIRST_STATE;
 	private BufferedImage imageGameOverText;
 	private BufferedImage replay;
+	@SuppressWarnings("removal")
+	private AudioClip scoreUpSound;
 	
 	public GameScreen() {
 		thread = new Thread(this);
 		mainCharacter = new MainCharacter();
 		mainCharacter.setX(50);
+		mainCharacter.setY(50);
 		land = new Land(this);
 		cloud = new Cloud();
 		cactusEnemyManager = new CactusEnemyManager(mainCharacter, this);
 		imageGameOverText = Resource.getResourceImage("data/gameover_text.png");
 		replay = Resource.getResourceImage("data/replay_button.png");
+		try {
+			scoreUpSound = Applet.newAudioClip(new URL("file","","data/scoreup.wav"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void startGame() {
 		thread.start();
@@ -75,6 +89,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 		}
 	}
 	public void plusScore(int score) {
+		scoreUpSound.play();
 		this.score += score;
 	}
 	
@@ -101,12 +116,24 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 				land.draw(g);
 				mainCharacter.draw(g);
 				cactusEnemyManager.draw(g);
+				g.setColor(Color.GRAY);
+				g.setFont(new Font("Noto Sans JP", Font.BOLD, 15));
+				g.drawString("HS: "+String.valueOf(score), 500, 20);
+				
 				g.drawImage(imageGameOverText, 200, 30, null);
 				g.drawImage(replay, 270, 50, null);
 				break;
 		}
 
 	}
+	private void resetGame() {
+		mainCharacter.setAlive(true);
+		mainCharacter.setX(50);
+		mainCharacter.setY(50);
+		cactusEnemyManager.reset();
+		score = 0;
+	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -127,6 +154,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 				} else if(gameState == GAME_PLAY_STATE) {
 					mainCharacter.jump();
 				} else if(gameState == GAME_OVER_STATE) {
+					resetGame();
 					gameState = GAME_PLAY_STATE;
 				}
 				break;
