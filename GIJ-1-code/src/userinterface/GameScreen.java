@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
+import objectgame.Cloud;
 import objectgame.Land;
 import objectgame.MainCharacter;
 
@@ -17,12 +18,14 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 	private MainCharacter mainCharacter;
 	private Thread thread;
 	private Land land;
+	private Cloud cloud;
 	
 	public GameScreen() {
 		thread = new Thread(this);
 		mainCharacter = new MainCharacter();
 		mainCharacter.setX(50);
 		land = new Land(this);
+		cloud = new Cloud();
 	}
 	public void startGame() {
 		thread.start();
@@ -34,6 +37,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 			try {
 				mainCharacter.update();
 				land.update();
+				cloud.update();
 				repaint();
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
@@ -48,7 +52,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.GRAY);
-		// g.drawLine(0, (int)GROUNDY, getWidth(), (int)GROUNDY);
+		cloud.draw(g);
 		land.draw(g);
 		mainCharacter.draw(g);
 		
