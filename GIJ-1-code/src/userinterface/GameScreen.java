@@ -5,20 +5,23 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
+
+import objectgame.Land;
 import objectgame.MainCharacter;
 
 public class GameScreen extends JPanel implements Runnable, KeyListener{
 	
-	public static final float GRAVITY = 0.1f;
-	public static final float GROUNDY = 300; // by pixels
+	public static final float GRAVITY = 0.25f;
+	public static final float GROUNDY = 100; // by pixels
 	
 	private MainCharacter mainCharacter;
 	private Thread thread;
+	private Land land;
 	
 	public GameScreen() {
 		thread = new Thread(this);
 		mainCharacter = new MainCharacter();
-		
+		land = new Land(this);
 	}
 	public void startGame() {
 		thread.start();
@@ -29,6 +32,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 		while(true) {
 			try {
 				mainCharacter.update();
+				land.update();
 				repaint();
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
@@ -44,6 +48,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.GRAY);
 		g.drawLine(0, (int)GROUNDY, getWidth(), (int)GROUNDY);
+		land.draw(g);
 		mainCharacter.draw(g);
 		
 	}

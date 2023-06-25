@@ -3,10 +3,7 @@ package objectgame;
 import static userinterface.GameScreen.GRAVITY;
 import static userinterface.GameScreen.GROUNDY;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-
 import util.Animation;
 import util.Resource;
 
@@ -23,7 +20,6 @@ public class MainCharacter {
 	}
 	public void update() {
 		characterRun.update();
-		// all this line code for jumping
 		if(y>=GROUNDY-characterRun.getFrame().getHeight()) {
 			speedY = 0;
 			y = GROUNDY-characterRun.getFrame().getHeight();
@@ -33,12 +29,10 @@ public class MainCharacter {
 		}
 	}
 	public void draw(Graphics g) {
-		// g.setColor(Color.BLUE);
-		// g.drawRect((int)x, (int)y, characterRun.getFrame().getWidth(), characterRun.getFrame().getHeight());
 		g.drawImage(characterRun.getFrame(), (int)x, (int)y, null);
 	}
 	public void jump() {
-		speedY = -3;
+		speedY = -4;
 		y += speedY;
 	}
 	public float getX() {
