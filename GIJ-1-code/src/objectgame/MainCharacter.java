@@ -14,7 +14,7 @@ public class MainCharacter {
 	private Animation characterRun;
 	
 	public MainCharacter() {
-		characterRun = new Animation(200);
+		characterRun = new Animation(100);
 		characterRun.addFrame(Resource.getResourceImage("data/main-character1.png"));
 		characterRun.addFrame(Resource.getResourceImage("data/main-character2.png"));
 	}

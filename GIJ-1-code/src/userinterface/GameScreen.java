@@ -11,7 +11,7 @@ import objectgame.MainCharacter;
 
 public class GameScreen extends JPanel implements Runnable, KeyListener{
 	
-	public static final float GRAVITY = 0.25f;
+	public static final float GRAVITY = 0.2f;
 	public static final float GROUNDY = 100; // by pixels
 	
 	private MainCharacter mainCharacter;
@@ -21,6 +21,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 	public GameScreen() {
 		thread = new Thread(this);
 		mainCharacter = new MainCharacter();
+		mainCharacter.setX(50);
 		land = new Land(this);
 	}
 	public void startGame() {
@@ -47,7 +48,7 @@ public class GameScreen extends JPanel implements Runnable, KeyListener{
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.GRAY);
-		g.drawLine(0, (int)GROUNDY, getWidth(), (int)GROUNDY);
+		// g.drawLine(0, (int)GROUNDY, getWidth(), (int)GROUNDY);
 		land.draw(g);
 		mainCharacter.draw(g);
 		
