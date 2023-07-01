@@ -6,7 +6,9 @@ The current repository contains some well-known games and guess what... *they ha
 
 ---
 > For a surprise experience!
+> 
 > Try following the steps below for any of the game code folder into your own local machine and run through the steps to get the game going on your device running!
+> 
 > The name of the game is contained in the README.md file of the repected game code folder if your curious to explore before running the game!
 ---
 
