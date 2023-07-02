@@ -1,4 +1,10 @@
-# games-in-java
+# games-built-in-java
+
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/132601485/250340499-c32bae82-7671-4ed6-8a79-a7d58cbbf26c.jpg">
+ <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/132601485/250340499-c32bae82-7671-4ed6-8a79-a7d58cbbf26c.jpg">
+ <img alt="Quantum Maniac" src="https://user-images.githubusercontent.com/132601485/250340499-c32bae82-7671-4ed6-8a79-a7d58cbbf26c.jpg">
+</picture>
 
 ## **Welcome Visitors!** 
 
