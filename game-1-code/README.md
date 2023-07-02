@@ -1,6 +1,9 @@
 # game-1-google-dino
 
+![](https://user-images.githubusercontent.com/132601485/250395457-d975a51f-bf61-4391-b45d-05693e39e260.gif)
+
 Almost every chrome user has played this game when their connection fails. 
+
 > (*ahem* ... cursing the important downloads)
 > 
 ## As of now the game contains:
